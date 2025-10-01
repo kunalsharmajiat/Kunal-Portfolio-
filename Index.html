@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kunal's Portfolio</title>
+    <!-- Load Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Inter Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Load Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <style>
+      /* Custom Tailwind Configuration */
+      :root {
+        --primary-color: #6366f1; /* Indigo-500 */
+      }
+
+      /* Default Dark Mode Styling */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #0d1117; /* Dark background */
+        color: #c9d1d9; /* Light text */
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      .dark {
+        --primary-color: #a5b4fc; /* Light Indigo for dark mode accents */
+      }
+
+      .light body {
+        background-color: #ffffff; /* Light background */
+        color: #1f2937; /* Dark text */
+      }
+
+      .light .bg-card-dark {
+        background-color: #f3f4f6; /* Lighter card background */
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+          0 2px 4px -2px rgb(0 0 0 / 0.1);
+        border-color: #e5e7eb;
+      }
+
+      .light .text-primary-color {
+        color: var(--primary-color);
+      }
+
+      .light .border-primary-color {
+        border-color: var(--primary-color);
+      }
+
+      /* Hero Image/Avatar Styling */
+      .hero-avatar {
+        border: 4px solid var(--primary-color);
+        box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+        transition: transform 0.3s ease;
+      }
+      .hero-avatar:hover {
+        transform: scale(1.05);
+      }
+
+      /* Typing Effect Cursor */
+      .typing-cursor {
+        display: inline-block;
+        animation: blink 0.7s infinite;
+        font-weight: 900;
+        color: var(--primary-color);
+      }
+
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+
+      /* Custom Scrollbar for better aesthetics */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #22272e; /* Slightly lighter dark background */
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--primary-color);
+        border-radius: 4px;
+      }
+      .light ::-webkit-scrollbar-track {
+        background: #f0f0f0;
+      }
+      .light ::-webkit-scrollbar-thumb {
+        background: var(--primary-color);
+      }
+
+      /* Smooth border gradient for sections */
+      .section-header::after {
+        content: "";
+        display: block;
+        width: 100px;
+        height: 3px;
+        margin-top: 8px;
+        background: linear-gradient(90deg, var(--primary-color), transparent);
+      }
+      .light .section-header::after {
+        background: linear-gradient(90deg, var(--primary-color), transparent);
+      }
+    </style>
+  </head>
+
+  <body class="bg-dark text-light">
+    <!-- Navbar/Header -->
+    <header
+      class="sticky top-0 z-50 bg-[#0d1117] bg-opacity-95 backdrop-blur-sm shadow-xl light:bg-white light:bg-opacity-95 light:shadow-md"
+    >
+      <nav
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-4"
+      >
+        <a
+          href="#home"
+          class="text-2xl font-extrabold text-primary-color tracking-wider transition duration-300 hover:scale-105"
+        >
+          &lt;Kunal /&gt;
+        </a>
+
+        <div class="hidden md:flex space-x-8 items-center font-medium">
+          <a
+            href="#home"
+            class="nav-link hover:text-primary-color transition duration-200"
+            >Home</a
+          >
+          <a
+            href="#about"
+            class="nav-link hover:text-primary-color transition duration-200"
+            >About</a
+          >
+          <a
+            href="#skills"
+            class="nav-link hover:text-primary-color transition duration-200"
+            >Skills</a
+          >
+          <a
+            href="#projects"
+            class="nav-link hover:text-primary-color transition duration-200"
+            >Projects</a
+          >
+          <a
+            href="#contact"
+            class="nav-link hover:text-primary-color transition duration-200"
+            >Contact</a
+          >
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button
+          id="mobile-menu-button"
+          class="md:hidden text-xl hover:text-primary-color focus:outline-none"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
+      </nav>
+
+      <!-- Mobile Menu Overlay -->
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden absolute top-full left-0 w-full bg-[#0d1117] light:bg-white border-t border-gray-700 light:border-gray-200 shadow-lg"
+      >
+        <div class="flex flex-col space-y-2 p-4 font-medium">
+          <a
+            href="#home"
+            class="nav-link block px-3 py-2 rounded-md hover:bg-gray-800 light:hover:bg-gray-100 transition duration-200"
+            >Home</a
+          >
+          <a
+            href="#about"
+            class="nav-link block px-3 py-2 rounded-md hover:bg-gray-800 light:hover:bg-gray-100 transition duration-200"
+            >About</a
+          >
+          <a
+            href="#skills"
+            class="nav-link block px-3 py-2 rounded-md hover:bg-gray-800 light:hover:bg-gray-100 transition duration-200"
+            >Skills</a
+          >
+          <a
+            href="#projects"
+            class="nav-link block px-3 py-2 rounded-md hover:bg-gray-800 light:hover:bg-gray-100 transition duration-200"
+            >Projects</a
+          >
+          <a
+            href="#contact"
+            class="nav-link block px-3 py-2 rounded-md hover:bg-gray-800 light:hover:bg-gray-100 transition duration-200"
+            >Contact</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Home/Hero Section -->
+      <section id="home" class="min-h-screen flex items-center pt-24 pb-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <!-- Text Content -->
+          <div class="order-2 md:order-1 text-center md:text-left">
+            <h1
+              class="text-4xl sm:text-5xl lg:text-7xl font-extrabold leading-tight"
+            >
+              Hi, I'm <span class="text-primary-color">Kunal</span>
+            </h1>
+            <p class="mt-4 text-2xl sm:text-3xl font-light">
+              And I'm a
+              <span id="typing-text" class="font-bold text-primary-color"></span
+              ><span class="typing-cursor">|</span>
+            </p>
+
+            <p
+              class="mt-8 text-lg text-gray-400 light:text-gray-600 max-w-lg mx-auto md:mx-0"
+            >
+              A highly motivated and adaptable fresher with strong analytical
+              skills and a proactive approach to problem-solving. Eager to
+              contribute to a team and continuously develop professionally.
+            </p>
+
+            <div
+              class="mt-10 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 justify-center md:justify-start"
+            >
+              <!-- CTA Button (Linked to your PDF) -->
+              <a
+                href="ResumeKunal.pdf"
+                download="Kunal_Sharma_Resume.pdf"
+                class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-primary-color hover:bg-indigo-700 transition duration-300 shadow-lg shadow-indigo-500/50 light:shadow-indigo-300/50"
+              >
+                Download CV
+              </a>
+              <!-- Social Icons (Updated with your specific URLs) -->
+              <div
+                class="flex space-x-6 justify-center md:justify-start items-center"
+              >
+                <!-- LinkedIn -->
+                <a
+                  href="https://www.linkedin.com/in/kunal-sharma-54a484325"
+                  target="_blank"
+                  class="text-2xl hover:text-primary-color transition duration-300 hover:scale-110"
+                  aria-label="LinkedIn"
+                >
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+                <!-- GitHub -->
+                <a
+                  href="https://github.com/kunalsharmajiat"
+                  target="_blank"
+                  class="text-2xl hover:text-primary-color transition duration-300 hover:scale-110"
+                  aria-label="GitHub"
+                >
+                  <i class="fab fa-github"></i>
+                </a>
+                <!-- Instagram -->
+                <a
+                  href="https://www.instagram.com/kunalsharmaat/"
+                  target="_blank"
+                  class="text-2xl hover:text-primary-color transition duration-300 hover:scale-110"
+                  aria-label="Instagram"
+                >
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <!-- LeetCode -->
+                <a
+                  href="https://www.leetcode.com/kunalsharmajiat"
+                  target="_blank"
+                  class="text-2xl hover:text-primary-color transition duration-300 hover:scale-110"
+                  aria-label="LeetCode"
+                >
+                  <i class="fas fa-laptop-code"></i>
+                  <!-- Using a coding icon for LeetCode -->
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Avatar - UPDATED SRC TO YOUR IMAGE FILE -->
+          <div class="order-1 md:order-2 flex justify-center">
+            <img
+              src="Screenshot 2024-10-23 201339 (1).jpg"
+              alt="Kunal Profile Picture"
+              onerror="this.onerror=null;this.src='https://placehold.co/400x400/1f2937/a5b4fc?text=Kunal+Avatar+Error';"
+              class="hero-avatar w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full object-cover"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section id="about" class="py-24">
+        <h2 class="section-header text-4xl font-extrabold mb-12">About Me</h2>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+          <!-- Main Description & Education -->
+          <div class="lg:col-span-2">
+            <p class="text-xl font-semibold mb-4 text-primary-color">
+              Hello! I'm Kunal, a dedicated developer.
+            </p>
+            <p class="mb-4 text-gray-300 light:text-gray-700 leading-relaxed">
+              I specialize in creating robust and user-friendly applications
+              from concept to deployment. My journey started with a deep
+              curiosity about how things work on the web, which quickly turned
+              into a passion for full-stack development. I thrive in
+              environments where I can learn new technologies and apply creative
+              problem-solving skills.
+            </p>
+            <p class="mb-4 text-gray-300 light:text-gray-700 leading-relaxed">
+              Currently, I'm focusing on strengthening my skills in Next.js and
+              serverless architectures. Whether it's crafting responsive
+              front-end components or optimizing database queries on the
+              back-end, I enjoy every phase of the development lifecycle. I
+              believe the best code is clean, well-tested, and maintainable.
+            </p>
+
+            <!-- Education Block -->
+            <div
+              class="mt-8 pt-6 border-t border-gray-700 light:border-gray-200"
+            >
+              <h3
+                class="text-2xl font-bold mb-4 text-primary-color flex items-center"
+              >
+                <i class="fas fa-graduation-cap mr-3"></i> Education
+              </h3>
+              <div class="space-y-4">
+                <div
+                  class="bg-gray-800 p-4 rounded-lg border border-gray-700 light:bg-gray-100 light:border-gray-200"
+                >
+                  <p class="text-lg font-semibold">
+                    Bachelor of Science | Computer Application
+                  </p>
+                  <p class="text-primary-color">
+                    Govt Maulana Azad Memorial Pg College Jammu
+                  </p>
+                  <p class="text-sm text-gray-400 light:text-gray-500">
+                    2021 - 2024 | Completed
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Details Card (Updated with your data) -->
+          <div
+            class="bg-[#161b22] bg-card-dark p-6 rounded-xl border border-gray-700 light:border-gray-200 light:bg-white space-y-4"
+          >
+            <h3
+              class="text-2xl font-bold mb-4 border-b pb-2 border-gray-700 light:border-gray-200 text-primary-color"
+            >
+              Details
+            </h3>
+            <div class="flex justify-between">
+              <span class="font-medium text-gray-400 light:text-gray-600"
+                >Name:</span
+              >
+              <span class="font-semibold">Kunal Sharma</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="font-medium text-gray-400 light:text-gray-600"
+                >Age:</span
+              >
+              <span class="font-semibold">23</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="font-medium text-gray-400 light:text-gray-600"
+                >Location:</span
+              >
+              <span class="font-semibold">Pune, Maharashtra, India</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="font-medium text-gray-400 light:text-gray-600"
+                >Email:</span
+              >
+              <span class="font-semibold text-primary-color break-all"
+                >kunalsharmajiat@gmail.com</span
+              >
+            </div>
+            <div class="flex justify-between">
+              <span class="font-medium text-gray-400 light:text-gray-600"
+                >Phone:</span
+              >
+              <span class="font-semibold break-all">+9160064 75471</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Skills Section (Updated to match resume skills) -->
+      <section id="skills" class="py-24">
+        <h2 class="section-header text-4xl font-extrabold mb-12">Skills</h2>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+          <!-- React.js -->
+          <div
+            class="bg-[#161b22] bg-card-dark p-6 rounded-xl border border-gray-700 light:border-gray-200 light:bg-white text-center hover:shadow-xl hover:shadow-indigo-500/20 light:hover:shadow-indigo-300/50 transition duration-300 transform hover:-translate-y-1"
+          >
+            <i class="fab fa-react text-5xl text-blue-400 mb-3"></i>
+            <p class="font-semibold">React Framework</p>
+          </div>
+
+          <!-- Node.js -->
+          <div
+            class="bg-[#161b22] bg-card-dark p-6 rounded-xl border border-gray-700 light:border-gray-200 light:bg-white text-center hover:shadow-xl hover:shadow-indigo-500/20 light:hover:shadow-indigo-300/50 transition duration-300 transform hover:-translate-y-1"
+          >
+            <i class="fab fa-node-js text-5xl text-green-500 mb-3"></i>
+            <p class="font-semibold">Node.js</p>
+          </div>
+
+          <!-- Python -->
+          <div
+            class="bg-[#161b22] bg-card-dark p-6 rounded-xl border border-gray-700 light:border-gray-200 light:bg-white text-center hover:shadow-xl hover:shadow-indigo-500/20 light:hover:shadow-indigo-300/50 transition duration-300 transform hover:-translate-y-1"
+          >
+            <i class="fab fa-python text-5xl text-yellow-600 mb-3"></i>
+            <p class="font-semibold">Python</p>
+          </div>
+
+          <!-- C/C++ -->
+          <div
+            class="bg-[#161b22] bg-card-dark p-6 rounded-xl border border-gray-700 light:border-gray-200 light:bg-white text-center hover:shadow-xl hover:shadow-indigo-500/20 light:hover:shadow-indigo-300/50 transition duration-300 transform hover:-translate-y-1"
+          >
+            <i class="fas fa-cogs text-5xl text-indigo-500 mb-3"></i>
+            <p class="font-semibold">C/C++</p>
+          </div>
+
+          <!-- JavaScript (ES6+) -->
+          <div
+            class="bg-[#161b22] bg-card-dark p-6 rounded-xl border border-gray-700 light:border-gray-200 light:bg-white text-center hover:shadow-xl hover:shadow-indigo-500/20 light:hover:shadow-indigo-300/50 transition duration-300 transform hover:-translate-y-1"
+          >
+            <i class="fab fa-js-square text-5xl text-yellow-500 mb-3"></i>
+            <p class="font-semibold">JavaScript (ES6+)</p>
+          </div>
+
+          <!-- HTML & CSS -->
+          <div
+            class="bg-[#161b22] bg-card-dark p-6 rounded-xl border border-gray-700 light:border-gray-200 light:bg-white text-center hover:shadow-xl hover:shadow-indigo-500/20 light:hover:shadow-indigo-300/50 transition duration-300 transform hover:-translate-y-1"
+          >
+            <i class="fas fa-code text-5xl text-orange-500 mb-3"></i>
+            <p class="font-semibold">HTML & CSS</p>
+          </div>
+
+          <!-- MySQL/SQL -->
+          <div
+            class="bg-[#161b22] bg-card-dark p-6 rounded-xl border border-gray-700 light:border-gray-200 light:bg-white text-center hover:shadow-xl hover:shadow-indigo-500/20 light:hover:shadow-indigo-300/50 transition duration-300 transform hover:-translate-y-1"
+          >
+            <i class="fas fa-database text-5xl text-amber-600 mb-3"></i>
+            <p class="font-semibold">MySQL/SQL</p>
+          </div>
+
+          <!-- Git/GitHub -->
+          <div
+            class="bg-[#161b22] bg-card-dark p-6 rounded-xl border border-gray-700 light:border-gray-200 light:bg-white text-center hover:shadow-xl hover:shadow-indigo-500/20 light:hover:shadow-indigo-300/50 transition duration-300 transform hover:-translate-y-1"
+          >
+            <i class="fab fa-git-alt text-5xl text-red-600 mb-3"></i>
+            <p class="font-semibold">Git/GitHub</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <section id="projects" class="py-24">
+        <h2 class="section-header text-4xl font-extrabold mb-12">
+          Featured Projects
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Project Card 1 -->
+          <div
+            class="bg-[#161b22] bg-card-dark rounded-xl overflow-hidden border border-gray-700 light:border-gray-200 light:bg-white hover:shadow-2xl hover:shadow-indigo-500/30 light:hover:shadow-indigo-300/50 transition duration-500"
+          >
+            <img
+              src="https://placehold.co/600x400/22272e/a5b4fc?text=E-Commerce+Platform"
+              alt="Project 1"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-2xl font-bold mb-2 text-primary-color">
+                PortFolio
+              </h3>
+              <p class="text-gray-400 light:text-gray-700 mb-4 text-sm">
+               A modern and responsive portfolio built with Next.js and Tailwind CSS, showcasing projects, skills, and experience. Features include a dynamic project gallery, smooth animations with Framer Motion, dark/light mode toggle, and SEO optimization for better visibility. Integrated with Contact Form API for easy communication.
+              </p>
+              <div class="flex space-x-3 text-sm font-medium">
+                <span
+                  class="px-3 py-1 bg-gray-800 rounded-full light:bg-gray-200 text-white"
+                  >Next.js</span
+                >
+                <span
+                  class="px-3 py-1 bg-gray-800 rounded-full light:bg-gray-200 text-white"
+                  >Tailwind</span
+                >
+                <span
+                  class="px-3 py-1 bg-gray-800 rounded-full light:bg-gray-200 text-white"
+                  >Prisma</span
+                >
+              </div>
+              <div class="mt-6 flex space-x-4">
+                <a
+                  href="#"
+                  target="_blank"
+                  class="text-primary-color hover:underline font-semibold"
+                >
+                  <i class="fas fa-external-link-alt mr-1"></i> Live Demo
+                </a>
+                <a
+                  href="#"
+                  target="_blank"
+                  class="text-gray-400 hover:text-primary-color font-semibold"
+                >
+                  <i class="fab fa-github mr-1"></i> Source Code
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project Card 2 -->
+          <div
+            class="bg-[#161b22] bg-card-dark rounded-xl overflow-hidden border border-gray-700 light:border-gray-200 light:bg-white hover:shadow-2xl hover:shadow-indigo-500/30 light:hover:shadow-indigo-300/50 transition duration-500"
+          >
+            <img
+              <img src="https://i.ibb.co/5gL5DgBM/Screenshot-2025-10-0-imresizer-1.jpg" alt="Screenshot-2025-10-0-imresizer-1"
+                border="0"
+
+              alt="Project 2"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-2xl font-bold mb-2 text-primary-color">
+                Calculator-html
+              </h3>
+              <p class="text-gray-400 light:text-gray-700 mb-4 text-sm">
+               Calculator-html. 
+<br>✨ Musical Colorful Calculator ✨
+ <br> 🎵 Musical Feedback 
+ <br>🌈 Colorful Design 
+ <br>🎮 Interactive Feel
+ <br> 🖥️ Easy to Use
+
+              </p>
+              <div class="flex space-x-3 text-sm font-medium">
+                <span
+                 class="px-3 py-1 bg-gray-800 rounded-full light:bg-gray-200 text-white"
+                  >React</span
+                >
+                <span
+                  class="px-3 py-1 bg-gray-800 rounded-full light:bg-gray-200 text-white"
+                  >Firebase</span
+                >
+                <span
+                 class="px-3 py-1 bg-gray-800 rounded-full light:bg-gray-200 text-white"
+                  >Drag & Drop</span
+                >
+              </div>
+              <div class="mt-6 flex space-x-4">
+                <a
+                  href="#"
+                  target="_blank"
+                  class="text-primary-color hover:underline font-semibold"
+                >
+                  <i class="fas fa-external-link-alt mr-1"></i> Live Demo
+                </li>
+            <li>
+              <a
+                class="github"
+                aria-label="GitHub"
+                href="https://github.com/kunalsharmajiat/Calculator-html"
+                target="_blank"
+                data-sr-id="7"
+                style="
+                  visibility: visible;
+                  opacity: 1;
+                  transform: matrix3d(
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  );
+                  transition: 0.2s linear, opacity 1s cubic-bezier(0.5, 0, 0, 1),
+                    transform 1s cubic-bezier(0.5, 0, 0, 1);
+                "
+                ><i class="fab fa-github"></i
+              ></a>
+            </li>
+
+
+                </a>
+                <a
+                  href="#"
+                  target="_blank"
+                  class="text-gray-400 hover:text-primary-color font-semibold"
+                >
+                  <i class="fab fa-github mr-1"></i> Source Code
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project Card 3 -->
+          <div
+            class="bg-[#161b22] bg-card-dark rounded-xl overflow-hidden border border-gray-700 light:border-gray-200 light:bg-white hover:shadow-2xl hover:shadow-indigo-500/30 light:hover:shadow-indigo-300/50 transition duration-500"
+          >
+            
+              <img
+                src="https://i.ibb.co/6cX1P2NH/Screenshot-2025-10-0-imresizer.jpg"
+                alt="Screenshot-2025-10-0-imresizer"
+                border="0"
+            /></a>
+            <div class="p-6">
+              <h3 class="text-2xl font-bold mb-2 text-primary-color">
+                Youtube-video-player
+              </h3>
+              <p class="text-gray-400 light:text-gray-700 mb-4 text-sm">
+                <br />
+                This is a simple YouTube video player webpage built with HTML.
+                <br />
+                It lets you paste any YouTube video link or just the video ID
+                into a text box. <br />
+                When you click Load, the video plays inside the page instantly —
+                no need to open YouTube. <br />
+                The player is clean and distraction-free: it hides YouTubes
+                descriptions,comments, and recommended videos, showing only the
+                video itself. <br />
+                The design is modern, responsive, and works on desktop and
+                mobile..
+              </p>
+              <div class="flex space-x-3 text-sm font-medium">
+                <span
+                 class="px-3 py-1 bg-gray-800 rounded-full light:bg-gray-200 text-white"
+                  >Vue.js</span
+                >
+                <span
+                  class="px-3 py-1 bg-gray-800 rounded-full light:bg-gray-200 text-white"
+                  >API</span
+                >
+                <span
+                  class="px-3 py-1 bg-gray-800 rounded-full light:bg-gray-200 text-white"
+                  >Responsive</span
+                >
+              </div>
+              <div class="mt-6 flex space-x-4">
+                <a
+                  href="#"
+                  target="_blank"
+                  class="text-primary-color hover:underline font-semibold"
+                >
+                  <i class="fas fa-external-link-alt mr-1"></i> Live Demo
+                </a>
+
+</li>
+            <li>
+              <a
+                class="github"
+                aria-label="GitHub"
+                href="https://github.com/kunalsharmajiat/Youtube-video-player"
+                target="_blank"
+                data-sr-id="7"
+                style="
+                  visibility: visible;
+                  opacity: 1;
+                  transform: matrix3d(
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1
+                  );
+                  transition: 0.2s linear, opacity 1s cubic-bezier(0.5, 0, 0, 1),
+                    transform 1s cubic-bezier(0.5, 0, 0, 1);
+                "
+                ><i class="fab fa-github"></i
+              ></a>
+            </li>
+
+
+
+
+
+                <a
+                  href="#"
+                  target="_blank"
+                  class="text-gray-400 hover:text-primary-color font-semibold"
+                >
+                  <i class="fab fa-github mr-1"></i> Source Code
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contact" class="py-24">
+        <h2 class="section-header text-4xl font-extrabold mb-12">
+          Get In Touch
+        </h2>
+
+        <div
+          class="max-w-3xl mx-auto bg-[#161b22] bg-card-dark p-8 md:p-12 rounded-xl border border-gray-700 light:border-gray-200 light:bg-white shadow-xl"
+        >
+          <p class="text-lg text-center mb-8 text-gray-300 light:text-gray-700">
+            Have a project in mind or want to collaborate? Send me a message!
+          </p>
+          <form action="#" method="POST" class="space-y-6">
+            <div>
+              <label
+                for="name"
+                class="block text-sm font-medium mb-2 text-gray-400 light:text-gray-700"
+                >Your Name</label
+              >
+              <input
+                type="text"
+                id="name"
+                name="name"
+               class="w-fullpx-3 py-1 bg-gray-800 w-full light:bg-gray-200 text-white"
+                required
+              />
+            </div>
+            <div>
+              <label
+                for="email"
+                class="block text-sm font-medium mb-2 text-gray-400 light:text-gray-700"
+                >Your Email</label
+              >
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="w-full px-3 py-1 bg-gray-800 w-full light:bg-gray-200 text-white"
+                placeholder="Your@gmail.com"
+                required
+              />
+            </div>
+            <div>
+              <label
+                for="message"
+                class="block text-sm font-medium mb-2 text-gray-400 light:text-gray-700"
+                >Message</label
+              >
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                class="w-full px-3 py-1 bg-gray-800 w-full light:bg-gray-200 text-white focus:ring-primary-color focus:border-primary-color light:bg-white light:border-gray-300 light:text-gray-900"
+                placeholder="I'd like to discuss a project..."
+                required
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              class="w-full px-6 py-3 border border-transparent text-lg font-medium rounded-lg text-white bg-primary-color hover:bg-indigo-700 transition duration-300 shadow-lg shadow-indigo-500/50 light:shadow-indigo-300/50"
+            >
+              Send Message
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Mode Toggle Button -->
+      <button
+        id="mode-toggle"
+        class="fixed bottom-6 right-6 p-3 rounded-full bg-primary-color text-white shadow-lg hover:scale-110 transition duration-300 z-50"
+      >
+        <i id="mode-icon" class="fas fa-sun"></i>
+      </button>
+    </main>
+
+    <!-- Footer -->
+    <footer
+      class="mt-12 py-8 border-t border-gray-700 light:border-gray-200 text-center text-sm text-gray-500 light:text-gray-600"
+    >
+      &copy; 2024 Kunal Sharma. All rights reserved. | Crafted with love.
+      <span class="text-red-500">&hearts;</span>
+    </footer>
+
+    <script>
+      // --- Dark/Light Mode Toggle Logic ---
+      const modeToggle = document.getElementById("mode-toggle");
+      const modeIcon = document.getElementById("mode-icon");
+      const htmlElement = document.documentElement;
+
+      // Function to set the mode
+      function setMode(mode) {
+        if (mode === "dark") {
+          htmlElement.classList.remove("light");
+          htmlElement.classList.add("dark");
+          modeIcon.className = "fas fa-sun"; // Show sun icon to switch to light mode
+          localStorage.setItem("theme", "dark");
+        } else {
+          htmlElement.classList.remove("dark");
+          htmlElement.classList.add("light");
+          modeIcon.className = "fas fa-moon"; // Show moon icon to switch to dark mode
+          localStorage.setItem("theme", "light");
+        }
+      }
+
+      // Initialize mode based on system preference or saved preference
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme) {
+        setMode(savedTheme);
+      } else if (
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: light)").matches
+      ) {
+        // Default to light mode if system preference is light
+        setMode("light");
+      } else {
+        // Default to dark mode
+        setMode("dark");
+      }
+
+      modeToggle.addEventListener("click", () => {
+        if (htmlElement.classList.contains("dark")) {
+          setMode("light");
+        } else {
+          setMode("dark");
+        }
+      });
+
+      // --- Typing Effect Logic ---
+      const textElement = document.getElementById("typing-text");
+      const roles = [
+        "Full-Stack Developer",
+        "Android App Developer",
+        "Backend Expert",
+        "Freelancer",
+      ];
+      let roleIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+      const typingSpeed = 100;
+      const deletingSpeed = 50;
+      const delayBetweenRoles = 1500;
+
+      function type() {
+        const currentRole = roles[roleIndex];
+        const displayText = currentRole.substring(0, charIndex);
+        textElement.textContent = displayText;
+
+        if (!isDeleting) {
+          // Typing forward
+          charIndex++;
+          if (charIndex > currentRole.length) {
+            isDeleting = true;
+            // Pause at the end of the word
+            setTimeout(type, delayBetweenRoles);
+            return;
+          }
+        } else {
+          // Deleting
+          charIndex--;
+          if (charIndex < 0) {
+            isDeleting = false;
+            roleIndex = (roleIndex + 1) % roles.length;
+            // Pause before starting the next word
+            setTimeout(type, 500);
+            return;
+          }
+        }
+
+        const speed = isDeleting ? deletingSpeed : typingSpeed;
+        setTimeout(type, speed);
+      }
+
+      // Start the typing animation on load
+      window.onload = () => {
+        // Delay starting the typing effect slightly for better UX
+        setTimeout(type, 500);
+      };
+
+      // --- Mobile Menu Toggle Logic ---
+      const mobileMenuButton = document.getElementById("mobile-menu-button");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const navLinks = document.querySelectorAll(".nav-link");
+
+      mobileMenuButton.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+        // Change button icon to X if open, or bars if closed
+        const icon = mobileMenuButton.querySelector("i");
+        if (mobileMenu.classList.contains("hidden")) {
+          icon.className = "fas fa-bars";
+        } else {
+          icon.className = "fas fa-times";
+        }
+      });
+
+      // Close mobile menu when a link is clicked
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          if (!mobileMenu.classList.contains("hidden")) {
+            mobileMenu.classList.add("hidden");
+            mobileMenuButton.querySelector("i").className = "fas fa-bars";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

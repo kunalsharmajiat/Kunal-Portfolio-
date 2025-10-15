@@ -4,78 +4,89 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kunal's Portfolio</title>
-    <!-- Load Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Load Inter Font -->
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
       rel="stylesheet"
     />
-    <!-- Load Font Awesome for icons -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     />
+
     <style>
-      /* Custom Tailwind Configuration */
+      /* Custom Tailwind Configuration & Default Dark Mode */
       :root {
         --primary-color: #6366f1; /* Indigo-500 */
       }
 
-      /* Default Dark Mode Styling */
       html {
         scroll-behavior: smooth;
       }
 
       body {
-        font-family: "Inter", sans-serif;
-        background-color: #0d1117; /* Dark background */
-        color: #c9d1d9; /* Light text */
-        transition: background-color 0.3s, color 0.3s;
+      /*
+        ----------------------------------
+        CSS Styles for a White Screen
+        ----------------------------------
+        */
+        body {
+            font-family: "Inter", sans-serif;
+            margin: 0;
+            padding: 50px 20px;
+            min-height: 100vh;
+            text-align: center;
+            
+            /* White Background */
+            background-color: #ffffff; 
+            /* Black Text */
+            color: #1f2937; 
+            
+            /* Smooth scrolling and basic reset */
+            line-height: 1.6;
+        }
+
+        /* Highlight color, using black or a dark color */
+        .text-primary-color {
+            color: #000000; /* Pure black for emphasis */
+            font-weight: bold;
+        }
+
+      /* --- SPLASH SCREEN STYLES (particles.js) --- */
+      #welcome-screen {
+        position: fixed; /* Fixed to cover the entire viewport */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #0d1117; /* Same as body dark mode */
+        z-index: 9999; /* Always on top */
+        transition: opacity 0.5s ease-out;
+        cursor: pointer;
       }
 
-      .dark {
-        --primary-color: #a5b4fc; /* Light Indigo for dark mode accents */
+      #particles-js {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 0;
       }
 
-      .light body {
-        background-color: #ffffff; /* Light background */
-        color: #1f2937; /* Dark text */
+      .welcome-content {
+        position: relative;
+        z-index: 1;
       }
 
-      .light .bg-card-dark {
-        background-color: #f3f4f6; /* Lighter card background */
-        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1),
-          0 2px 4px -2px rgb(0 0 0 / 0.1);
-        border-color: #e5e7eb;
-      }
-
-      .light .text-primary-color {
-        color: var(--primary-color);
-      }
-
-      .light .border-primary-color {
-        border-color: var(--primary-color);
-      }
-
-      /* Hero Image/Avatar Styling */
-      .hero-avatar {
-        border: 4px solid var(--primary-color);
-        box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
-        transition: transform 0.3s ease;
-      }
-      .hero-avatar:hover {
-        transform: scale(1.05);
-      }
-
-      /* Typing Effect Cursor */
+      /* Typing Effect Cursor (kept from your portfolio code) */
       .typing-cursor {
         display: inline-block;
         animation: blink 0.7s infinite;
         font-weight: 900;
         color: var(--primary-color);
       }
-
       @keyframes blink {
         0%,
         100% {
@@ -86,25 +97,7 @@
         }
       }
 
-      /* Custom Scrollbar for better aesthetics */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #22272e; /* Slightly lighter dark background */
-      }
-      ::-webkit-scrollbar-thumb {
-        background: var(--primary-color);
-        border-radius: 4px;
-      }
-      .light ::-webkit-scrollbar-track {
-        background: #f0f0f0;
-      }
-      .light ::-webkit-scrollbar-thumb {
-        background: var(--primary-color);
-      }
-
-      /* Smooth border gradient for sections */
+      /* Additional styles for portfolio sections (kept for consistency) */
       .section-header::after {
         content: "";
         display: block;
@@ -113,540 +106,674 @@
         margin-top: 8px;
         background: linear-gradient(90deg, var(--primary-color), transparent);
       }
-      .light .section-header::after {
-        background: linear-gradient(90deg, var(--primary-color), transparent);
-      }
     </style>
   </head>
 
   <body class="bg-dark text-light">
-    <!-- Navbar/Header -->
-    <header
-      class="sticky top-0 z-50 bg-[#0d1117] bg-opacity-95 backdrop-blur-sm shadow-xl light:bg-white light:bg-opacity-95 light:shadow-md"
+    <section
+      id="welcome-screen"
+      class="flex items-center justify-center text-center"
+      aria-label="Welcome Splash Screen, Click to enter Portfolio"
     >
-      <nav
-        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-4"
-      >
-        
-<a href="#home" class="text-2xl font-extrabold text-primary-color tracking-wider transition duration-300 hover:scale-105"> Kunal Portfolio </a>
+      <div id="particles-js"></div>
 
-         <div class="hidden md:flex space-x-8 items-center font-medium">
-          <a
-            href="#home"
-            class="nav-link hover:text-primary-color transition duration-200"
-            >Home</a
-          >
-          <a
-            href="#about"
-            class="nav-link hover:text-primary-color transition duration-200"
-            >About</a
-          >
-          <a
-            href="#skills"
-            class="nav-link hover:text-primary-color transition duration-200"
-            >Skills</a
-          >
-          <a
-            href="#projects"
-            class="nav-link hover:text-primary-color transition duration-200"
-            >Projects</a
-          >
-          <a
-            href="#contact"
-            class="nav-link hover:text-primary-color transition duration-200"
-            >Contact</a
-          >
-        </div>
-
-        <!-- Mobile Menu Button -->
-        <button
-          id="mobile-menu-button"
-          class="md:hidden text-xl hover:text-primary-color focus:outline-none"
+      <div class="welcome-content px-4">
+        <h1
+          class="text-4xl sm:text-6xl lg:text-8xl font-extrabold mb-4 text-white animate-pulse"
         >
-          <i class="fas fa-bars"></i>
-        </button>
-      </nav>
-
-      <!-- Mobile Menu Overlay -->
-      <div
-        id="mobile-menu"
-        class="hidden md:hidden absolute top-full left-0 w-full bg-[#0d1117] light:bg-white border-t border-gray-700 light:border-gray-200 shadow-lg"
-      >
-        <div class="flex flex-col space-y-2 p-4 font-medium">
-          <a
-            href="#home"
-            class="nav-link block px-3 py-2 rounded-md hover:bg-gray-800 light:hover:bg-gray-100 transition duration-200"
-            >Home</a
-          >
-          <a
-            href="#about"
-            class="nav-link block px-3 py-2 rounded-md hover:bg-gray-800 light:hover:bg-gray-100 transition duration-200"
-            >About</a
-          >
-          <a
-            href="#skills"
-            class="nav-link block px-3 py-2 rounded-md hover:bg-gray-800 light:hover:bg-gray-100 transition duration-200"
-            >Skills</a
-          >
-          <a
-            href="#projects"
-            class="nav-link block px-3 py-2 rounded-md hover:bg-gray-800 light:hover:bg-gray-100 transition duration-200"
-            >Projects</a
-          >
-          <a
-            href="#contact"
-            class="nav-link block px-3 py-2 rounded-md hover:bg-gray-800 light:hover:bg-gray-100 transition duration-200"
-            >Contact</a
-          >
-        </div>
+          Welcome
+        </h1>
+        <p class="text-xl sm:text-2xl text-gray-300">
+          Click anywhere to explore Kunal's Portfolio
+        </p>
+        <p <p class="mt-8 text-lg font-medium max-w-lg mx-auto md:mx-0 leading-relaxed tracking-wide bg-gradient-to-r from-indigo-400 via-pink-400 to-yellow-400 bg-clip-text text-transparent animate-gradient-x hover:scale-105 hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.6)] transition-transform duration-500">✨ Tap to begin ✨</p>
       </div>
-    </header>
+    </section>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <!-- Home/Hero Section -->
-      <section id="home" class="min-h-screen flex items-center pt-24 pb-12">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <!-- Text Content -->
-          <div class="order-2 md:order-1 text-center md:text-left">
-            <h1
-              class="text-4xl sm:text-5xl lg:text-7xl font-extrabold leading-tight"
+    <div id="portfolio-content" class="hidden">
+      <header
+        class="sticky top-0 z-50 bg-[#0d1117] bg-opacity-95 backdrop-blur-sm shadow-xl light:bg-white light:bg-opacity-95 light:shadow-md"
+      >
+        <nav
+          class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-4"
+        >
+          <a class="text-2xl font-extrabold bg-gradient-to-r from-violet-400 via-fuchsia-500 to-amber-400 bg-clip-text text-transparent tracking-wider transition duration-700 hover:scale-110 hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.5)] animate-gradient-x" href="#home">
+  Kunal Portfolio
+</a>
+
+<style>
+@keyframes gradient-x {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.animate-gradient-x {
+  background-size: 300% 300%;
+  animation: gradient-x 6s ease-in-out infinite;
+}
+</style>
+
+
+          <div class="hidden md:flex space-x-8 items-center font-medium animate-gradient-x">
+  <a href="#home" class="nav-link gradient-text">Home</a>
+  <a href="#about" class="nav-link gradient-text">About</a>
+  <a href="#skills" class="nav-link gradient-text">Skills</a>
+  <a href="#projects" class="nav-link gradient-text">Projects</a>
+  <a href="#contact" class="nav-link gradient-text">Contact</a>
+</div>
+
+<style>
+.gradient-text {
+  background: linear-gradient(to right, #a855f7, #ec4899, #facc15);
+  -webkit-background-clip: text;
+  color: transparent;
+  background-size: 200% 200%;
+  transition: all 0.4s ease;
+}
+.gradient-text:hover {
+  transform: scale(1.1);
+  filter: brightness(1.3) drop-shadow(0 0 8px rgba(236,72,153,0.6));
+}
+@keyframes gradient-x {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.animate-gradient-x {
+  animation: gradient-x 6s ease-in-out infinite;
+}
+</style>
+
+
+          <button
+            id="mobile-menu-button"
+            class="md:hidden text-xl hover:text-primary-color focus:outline-none"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+        </nav>
+
+        <div
+          id="mobile-menu"
+          class="hidden md:hidden absolute top-full left-0 w-full bg-[#0d1117] light:bg-white border-t border-gray-700 light:border-gray-200 shadow-lg"
+        >
+          <div class="flex flex-col space-y-2 p-4 font-medium">
+            <a
+              href="#home"
+              class="nav-link block px-3 py-1 bg-gray-800 rounded-md light:bg-gray-200 text-white"
+              >Home</a
             >
-              Hi, I'm <span class="text-primary-color">Kunal</span>
-            </h1>
-            <p class="mt-4 text-2xl sm:text-3xl font-light">
-              And I'm a
-              <span id="typing-text" class="font-bold text-primary-color"></span
-              ><span class="typing-cursor">|</span>
-            </p>
-
-            <p
-              class="mt-8 text-lg text-gray-400 light:text-gray-600 max-w-lg mx-auto md:mx-0"
+            <a
+              href="#about"
+              class="nav-link block px-3 py-1 bg-gray-800 rounded-md light:bg-gray-200 text-white"
+              >About</a
             >
-              A highly motivated and adaptable fresher with strong analytical
-              skills and a proactive approach to problem-solving. Eager to
-              contribute to a team and continuously develop professionally.
-            </p>
-
-            <div
-              class="mt-10 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 justify-center md:justify-start"
+            <a
+              href="#skills"
+              class="nav-link block px-3 py-1 bg-gray-800 rounded-md light:bg-gray-200 text-white"
+              >Skills</a
             >
-              <!-- CTA Button (Linked to your PDF) -->
-              <a
-                href="c:\Atul2.0\J7\WhatsApp\Media\WhatsApp Video\Sent\Ht\ResumeKunal.pdf"
-                download="Kunal_Sharma_Resume.pdf"
-                class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-primary-color hover:bg-indigo-700 transition duration-300 shadow-lg shadow-indigo-500/50 light:shadow-indigo-300/50"
-              >
-                Download CV
-              </a>
-              <!-- Social Icons (Updated with your specific URLs) -->
-              <div
-                class="flex space-x-6 justify-center md:justify-start items-center"
-              >
-                <!-- LinkedIn -->
-                <a
-                  href="https://www.linkedin.com/in/kunal-sharma-54a484325"
-                  target="_blank"
-                  class="text-2xl hover:text-primary-color transition duration-300 hover:scale-110"
-                  aria-label="LinkedIn"
-                >
-                  <i class="fab fa-linkedin-in"></i>
-                </a>
-                <!-- GitHub -->
-                <a
-                  href="https://github.com/kunalsharmajiat"
-                  target="_blank"
-                  class="text-2xl hover:text-primary-color transition duration-300 hover:scale-110"
-                  aria-label="GitHub"
-                >
-                  <i class="fab fa-github"></i>
-                </a>
-                <!-- Instagram -->
-                <a
-                  href="https://www.instagram.com/kunalsharmaat/"
-                  target="_blank"
-                  class="text-2xl hover:text-primary-color transition duration-300 hover:scale-110"
-                  aria-label="Instagram"
-                >
-                  <i class="fab fa-instagram"></i>
-                </a>
-                <!-- LeetCode -->
-                <a
-                  href="https://www.leetcode.com/kunalsharmajiat"
-                  target="_blank"
-                  class="text-2xl hover:text-primary-color transition duration-300 hover:scale-110"
-                  aria-label="LeetCode"
-                >
-                  <i class="fas fa-laptop-code"></i>
-                  <!-- Using a coding icon for LeetCode -->
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Avatar - UPDATED SRC TO YOUR IMAGE FILE -->
-          <div class="order-1 md:order-2 flex justify-center">
-            <img
-             
-              
-              onerror="this.onerror=null;this.<a href="https://ibb.co/fdbYRh6m"><img src="https://i.ibb.co/WvQW9b8S/Gemini-Generated-Image-usvk65usvk65usvk.png" alt="Gemini-Generated-Image-usvk65usvk65usvk" border="0"></a>
+            <a
+              href="#projects"
+              class="nav-link block px-3 py-1 bg-gray-800 rounded-md light:bg-gray-200 text-white"
+              >Projects</a
+            >
+            <a
+              href="#contact"
+              class="nav-link block px-3 py-1 bg-gray-800 rounded-md light:bg-gray-200 text-white"
+              >Contact</a
+            >
           </div>
         </div>
-      </section>
+      </header>
 
-      <!-- About Section -->
-      <section id="about" class="py-24">
-        <h2 class="section-header text-4xl font-extrabold mb-12">About Me</h2>
-
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
-          <!-- Main Description & Education -->
-          <div class="lg:col-span-2">
-            <p class="text-xl font-semibold mb-4 text-primary-color">
-              Hello! I'm Kunal, a dedicated developer.
-            </p>
-            <p class="mb-4 text-gray-300 light:text-gray-700 leading-relaxed">
-              I specialize in creating robust and user-friendly applications
-              from concept to deployment. My journey started with a deep
-              curiosity about how things work on the web, which quickly turned
-              into a passion for full-stack development. I thrive in
-              environments where I can learn new technologies and apply creative
-              problem-solving skills.
-            </p>
-            <p class="mb-4 text-gray-300 light:text-gray-700 leading-relaxed">
-              Currently, I'm focusing on strengthening my skills in Next.js and
-              serverless architectures. Whether it's crafting responsive
-              front-end components or optimizing database queries on the
-              back-end, I enjoy every phase of the development lifecycle. I
-              believe the best code is clean, well-tested, and maintainable.
-            </p>
-
-            <!-- Education Block -->
-            <div
-              class="mt-8 pt-6 border-t border-gray-700 light:border-gray-200"
-            >
-              <h3
-                class="text-2xl font-bold mb-4 text-primary-color flex items-center"
+      <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="home" class="min-h-screen flex items-center pt-24 pb-12">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="order-2 md:order-1 text-center md:text-left">
+              <h1
+                class="text-4xl sm:text-5xl lg:text-7xl font-extrabold leading-tight"
               >
-                <i class="fas fa-graduation-cap mr-3"></i> Education
-              </h3>
-              <div class="space-y-4">
-                <div
-                  class="bg-gray-800 p-4 rounded-lg border border-gray-700 light:bg-gray-100 light:border-gray-200"
+                Hi, I'm <span class="bg-gradient-to-r from-pink-400 via-cyan-400 to-lime-400 bg-clip-text text-transparent animate-gradient-x">Kunal</span>
+              </h1>
+              <p class="mt-4 text-2xl sm:text-3xl font-light">
+                And I'm a
+                <span
+                  id="typing-text"
+                  class="font-bold bg-gradient-to-r from-pink-400 via-cyan-400 to-lime-400 bg-clip-text text-transparent animate-gradient-x"></span
+                ><span class="typing-cursor">|</span>
+              </p>
+
+              <p class="mt-8 text-lg font-medium max-w-lg mx-auto md:mx-0 leading-relaxed tracking-wide bg-gradient-to-r from-indigo-400 via-pink-400 to-yellow-400 bg-clip-text text-transparent animate-gradient-x hover:scale-105 hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.6)] transition-transform duration-500">
+                A highly motivated and adaptable fresher with strong analytical
+                skills and a proactive approach to problem-solving. Eager to
+                contribute to a team and continuously develop professionally.
+              </p>
+
+              <div
+                class="mt-10 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 justify-center md:justify-start"
+              >
+                <a
+                  href="c:\Atul2.0\J7\WhatsApp\Media\WhatsApp Video\Sent\Ht\ResumeKunal.pdf"
+                  download="Kunal_Sharma_Resume.pdf"
+                  class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-primary-color hover:bg-indigo-700 transition duration-300 shadow-lg shadow-indigo-500/50 light:shadow-indigo-300/50"
                 >
-                  <p class="text-lg font-semibold">
-                    Bachelor of Science | Computer Application
-                  </p>
-                  <p class="text-primary-color">
-                    Govt Maulana Azad Memorial Pg College Jammu
-                  </p>
-                  <p class="text-sm text-gray-400 light:text-gray-500">
-                    2021 - 2024 | Completed
-                  </p>
+                  Download CV
+                </a>
+                <div class="flex space-x-4 items-center text-2xl">
+                  <a
+                    href="https://www.linkedin.com/in/kunal-sharma-54a484325"
+                    target="_blank"
+                    class="text-blue-700 hover:text-primary-color transition duration-300 hover:scale-110"
+                    aria-label="LinkedIn"
+                  >
+                    <i class="fab fa-linkedin-in"></i>
+                  </a>
+                  <a
+                    href="https://github.com/kunalsharmajiat"
+                    target="_blank"
+                    class="text-[#181717] dark:text-[#181717] hover:text-[#2a2a2a] transition duration-300 hover:scale-110"
+                    aria-label="GitHub"
+                  >
+                    <i class="fab fa-github"></i>
+                  </a>
+                  <a
+                    href="https://www.instagram.com/kunalsharmaat/"
+                    target="_blank"
+                    class="text-pink-500 hover:text-primary-color transition duration-300 hover:scale-110"
+                    aria-label="Instagram"
+                  >
+                    <i class="fab fa-instagram"></i>
+                  </a>
+                  <a
+                    href="https://www.leetcode.com/kunalsharmajiat"
+                    target="_blank"
+                    class="text-green-500 hover:text-primary-color transition duration-300 hover:scale-110"
+                    aria-label="LeetCode"
+                  >
+                    <i class="fas fa-laptop-code"></i>
+                  </a>
                 </div>
               </div>
             </div>
-          </div>
 
-          <!-- Details Card (Updated with your data) -->
-          <div
-            class="bg-[#161b22] bg-card-dark p-6 rounded-xl border border-gray-700 light:border-gray-200 light:bg-white space-y-4"
-          >
-            <h3
-              class="text-2xl font-bold mb-4 border-b pb-2 border-gray-700 light:border-gray-200 text-primary-color"
+            <div class="order-1 md:order-2 flex justify-center">
+              <div class="order-1 md:order-2 flex justify-center">
+           
+  <div class="relative card-container">
+        <div class="card-background"></div>
+
+        <div class="card w-80 h-96 bg-white rounded-3xl overflow-hidden flex flex-col items-center">
+            
+            <img src="https://i.ibb.co/WvQW9b8S/Gemini-Generated-Image-usvk65usvk65usvk.png" alt="Kunal Sharma Avatar" class="w-64 h-64 md:w-80 md:h-80 rounded-full object-cover primary-color hero-avatar">
+            
+            <div class="p-6">
+                <h2 class="text-xl font-bold mt-4 text-gray-800">
+                <p class="text-sm text-gray-500"></p>
+            </div>
+        </div>
+    </div>
+            </div>
+          </div>
+        </section>
+      <hr class="border-gray-700 light:border-gray-200 my-12" />
+
+
+
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+<br />
+<br />
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <!-- Text Content -->
+          <div class="order-1 md:order-2 flex justify-center">
+          
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Card Hover Effect - Grayscale to Color</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Define the custom transition class for the 3D effect */
+        .card-container {
+            /* 1. Define the 3D viewing space (perspective) on the PARENT element */
+            perspective: 1000px; 
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .card {
+            /* --- INITIAL STYLE --- */
+            transform: translateZ(0);
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2); 
+            
+            /* Add filter transition for the grayscale effect, and transform for the 3D movement */
+            transition: 
+                transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                box-shadow 0.5s ease-out,
+                filter 0.5s ease-out;
+
+            /* Allows 3D transforms to look correct */
+            transform-style: preserve-3d;
+        }
+        
+        /* Apply filter to the image inside the card */
+        .card img {
+            /* === REVERSED: START BLACK & WHITE === */
+            filter: grayscale(100%); 
+            transition: filter 0.5s ease-out;
+        }
+
+        .card-container:hover .card {
+            /* --- HOVER STYLE (3D Transform) --- */
+            transform: rotateX(5deg) rotateY(-5deg) translateZ(20px) translateY(-5px);
+            box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-container:hover .card img {
+            /* === REVERSED: CHANGE TO FULL COLOR ON HOVER === */
+            filter: grayscale(0%); 
+        }
+
+        /* Styling for the subtle background element */
+        .card-background {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 100%;
+            height: 100%;
+            background-color: #e5e7eb;
+            border-radius: 1.5rem;
+            transform: translateZ(-5px); 
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: -1;
+        }
+
+        .card-container:hover .card-background {
+            /* Move the background card slightly more on hover to enhance depth illusion */
+            transform: translateZ(5px) translateX(-5px) translateY(-5px);
+        }
+    </style>
+
+
+
+    <div class="relative card-container">
+      
+
+        <div class="card w-80 h-96 bg-white rounded-3xl overflow-hidden flex flex-col items-center">
+            
+          <a href="https://imgbb.com/"><img src="https://i.ibb.co/YBgRkQVd/IMG-1216-removebg-preview.png" alt="IMG-1216-removebg-preview" border="0"></a>  
+            <div class="p-6">
+                <h2 class="text-xl font-bold mt-4 text-gray-800">Color on Hover Effect</h2>
+                <p class="text-sm text-gray-500">Image starts B&amp;W, turns color on hover.</p>
+            </div>
+        </div>
+    </div>
+            <h2 class="mb-5 text-3xl font-bold text-dark sm:text-[40px]/[48px] dark:text-white"> <br>
+              Fresher with strong analytical skills
+              <div class="flex space-x-4 items-center text-2xl">
+                  <a href="https://www.linkedin.com/in/kunal-sharma-54a484325" target="_blank" class="text-blue-700 hover:text-primary-color transition duration-300 hover:scale-110" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                  </a>
+                  <a href="https://github.com/kunalsharmajiat" target="_blank" class="text-[#181717] dark:text-[#181717] hover:text-[#2a2a2a] transition duration-300 hover:scale-110" aria-label="GitHub">
+                    <i class="fab fa-github"></i>
+                  </a>
+                  <a href="https://www.instagram.com/kunalsharmaat/" target="_blank" class="text-pink-500 hover:text-primary-color transition duration-300 hover:scale-110" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                  </a>
+                  <a href="https://www.leetcode.com/kunalsharmajiat" target="_blank" class="text-green-500 hover:text-primary-color transition duration-300 hover:scale-110" aria-label="LeetCode">
+                    <i class="fas fa-laptop-code"></i>
+                  </a>
+                </div>
+              <p align="right"><a href="c:\Atul2.0\J7\WhatsApp\Media\WhatsApp Video\Sent\Ht\ResumeKunal.pdf" download="Kunal_Sharma_Resume.pdf" class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-primary-color hover:bg-indigo-700 transition duration-300 shadow-lg shadow-indigo-500/50 light:shadow-indigo-300/50">
+                  Download CV </a>
+                </p>
+
+            </h2>
+          </div>
+         
+
+          <!-- Avatar - UPDATED SRC TO YOUR IMAGE FILE -->
+          <div class="order-1 md:order-2 flex justify-center">
+            <img onerror="this.onerror=null;this.&lt;a href=" https:="" ibb.co="" fdbyrh6m"="">
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+        <hr class="border-gray-700 light:border-gray-200 my-12" />
+
+        <section id="about" class="py-24">
+          <h2 class="section-header text-4xl font-extrabold mb-12">About Me</h2>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+            <div class="lg:col-span-2">
+              <p class="text-xl font-semibold mb-4 text-primary-color">
+                Hello! I'm Kunal, a dedicated developer.
+              </p>
+              <p class="mb-5 text-s font-medium bg-gradient-to-r from-pink-400 via-cyan-400 to-lime-400 bg-clip-text text-transparent leading-relaxed tracking-wide animate-gradient-x hover:scale-105 hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.6)] transition-transform duration-500">
+                I specialize in creating robust and user-friendly applications
+                from concept to deployment. My journey started with a deep
+                curiosity about how things work on the web, which quickly turned
+                into a passion for full-stack development. I thrive in
+                environments where I can learn new technologies and apply
+                creative problem-solving skills.
+              </p>
+              <p class="mb-5 text-s font-medium bg-gradient-to-r from-pink-400 via-cyan-400 to-lime-400 bg-clip-text text-transparent leading-relaxed tracking-wide animate-gradient-x hover:scale-105 hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.6)] transition-transform duration-500">
+  Currently, I'm focusing on strengthening my skills in <span class="font-semibold">Next.js</span> and <span class="font-semibold">Git</span>. Whether it's crafting responsive front-end components or optimizing database queries on the back-end, I enjoy every phase of the development lifecycle. I believe the best code is clean, well-tested, and maintainable.
+</p>
+
+
+              <div
+                class="mt-8 pt-6 border-t border-gray-700 light:border-gray-200"
+              >
+                <h3
+                  class="text-2xl font-bold mb-4 text-primary-color flex items-center"
+                >
+                  <i class="fas fa-graduation-cap mr-3"></i> Education
+                </h3>
+                <div class="space-y-4">
+                  <div
+                    class="bg-gray-800 p-4 rounded-lg border border-gray-700 light:bg-gray-100 light:border-gray-200"
+                  >
+                    <p class="text-sm text-gray-400 light:text-gray-500">
+                      Bachelor of Science | Computer Application
+                    </p>
+                    <p class="text-[#0A4D8C]">
+                      Govt Maulana Azad Memorial Pg College | Jammu |
+                    </p>
+                    <p class="text-sm text-gray-400 light:text-gray-500">
+                      2021 - 2024 | Completed | 6.4 CGPA |
+                    </p>
+                  </div>
+                  <div
+                    class="bg-gray-800 p-4 rounded-lg border border-gray-700 light:bg-gray-100 light:border-gray-200"
+                  >
+                    <p class="text-sm text-gray-400 light:text-gray-500">
+                      HIGHER SECONDARY SCHOOL | PCM |
+                    </p>
+                    <p class="text-[#0A4D8C]">
+                      Shiv Public Higher Secondary School Jammu | JKBOSE |
+                    </p>
+                    <p class="text-sm text-gray-400 light:text-gray-500">
+                      2020 - 2021 | Completed | 6.8 CGPA |
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-[#161b22] p-6 rounded-xl border border-gray-700 light:border-gray-200 light:bg-white space-y-4 h-fit"
             >
-              Details
-            </h3>
-            <div class="flex justify-between">
-              <span class="font-medium text-gray-400 light:text-gray-600"
-                >Name:</span
-              >
-              <span class="font-semibold">Kunal Sharma</span>
-            </div>
-            <div class="flex justify-between">
-              <span class="font-medium text-gray-400 light:text-gray-600"
-                >Age:</span
-              >
-              <span class="font-semibold">23</span>
-            </div>
-            <div class="flex justify-between">
-              <span class="font-medium text-gray-400 light:text-gray-600"
-                >Location:</span
-              >
-              <span class="font-semibold">Pune, Maharashtra, India</span>
-            </div>
-            <div class="flex justify-between">
-              <span class="font-medium text-gray-400 light:text-gray-600"
-                >Email:</span
-              >
-              <span class="font-semibold text-primary-color break-all"
-                >kunalsharmajiat@gmail.com</span
-              >
-            </div>
-            <div class="flex justify-between">
-              <span class="font-medium text-gray-400 light:text-gray-600"
-                >Phone:</span
-              >
-              <span class="font-semibold break-all">+9160064 75471</span>
-            </div>
-          </div>
-        </div>
-      </section>
+              <h3 class="text-2xl font-bold mb-4 border-b pb-2 border-gray-700 light:border-gray-200 text-white">
+  Details
+</h3>
 
-      <!-- Skills Section (Updated to match resume skills) -->
-      <section id="skills" class="py-24">
-        <h2 class="section-header text-4xl font-extrabold mb-12">Skills</h2>
-
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
-          <!-- React.js -->
-          <div
-            class="bg-[#161b22] bg-card-dark p-6 rounded-xl border border-gray-700 light:border-gray-200 light:bg-white text-center hover:shadow-xl hover:shadow-indigo-500/20 light:hover:shadow-indigo-300/50 transition duration-300 transform hover:-translate-y-1"
-          >
-            <i class="fab fa-react text-5xl text-blue-400 mb-3"></i>
-            <p class="font-semibold">React Framework</p>
-          </div>
-
-          <!-- Node.js -->
-          <div
-            class="bg-[#161b22] bg-card-dark p-6 rounded-xl border border-gray-700 light:border-gray-200 light:bg-white text-center hover:shadow-xl hover:shadow-indigo-500/20 light:hover:shadow-indigo-300/50 transition duration-300 transform hover:-translate-y-1"
-          >
-            <i class="fab fa-node-js text-5xl text-green-500 mb-3"></i>
-            <p class="font-semibold">Node.js</p>
-          </div>
-
-          <!-- Python -->
-          <div
-            class="bg-[#161b22] bg-card-dark p-6 rounded-xl border border-gray-700 light:border-gray-200 light:bg-white text-center hover:shadow-xl hover:shadow-indigo-500/20 light:hover:shadow-indigo-300/50 transition duration-300 transform hover:-translate-y-1"
-          >
-            <i class="fab fa-python text-5xl text-yellow-600 mb-3"></i>
-            <p class="font-semibold">Python</p>
-          </div>
-
-          <!-- C/C++ -->
-          <div
-            class="bg-[#161b22] bg-card-dark p-6 rounded-xl border border-gray-700 light:border-gray-200 light:bg-white text-center hover:shadow-xl hover:shadow-indigo-500/20 light:hover:shadow-indigo-300/50 transition duration-300 transform hover:-translate-y-1"
-          >
-            <i class="fas fa-cogs text-5xl text-indigo-500 mb-3"></i>
-            <p class="font-semibold">C/C++</p>
-          </div>
-
-          <!-- JavaScript (ES6+) -->
-          <div
-            class="bg-[#161b22] bg-card-dark p-6 rounded-xl border border-gray-700 light:border-gray-200 light:bg-white text-center hover:shadow-xl hover:shadow-indigo-500/20 light:hover:shadow-indigo-300/50 transition duration-300 transform hover:-translate-y-1"
-          >
-            <i class="fab fa-js-square text-5xl text-yellow-500 mb-3"></i>
-            <p class="font-semibold">JavaScript (ES6+)</p>
-          </div>
-
-          <!-- HTML & CSS -->
-          <div
-            class="bg-[#161b22] bg-card-dark p-6 rounded-xl border border-gray-700 light:border-gray-200 light:bg-white text-center hover:shadow-xl hover:shadow-indigo-500/20 light:hover:shadow-indigo-300/50 transition duration-300 transform hover:-translate-y-1"
-          >
-            <i class="fas fa-code text-5xl text-orange-500 mb-3"></i>
-            <p class="font-semibold">HTML & CSS</p>
-          </div>
-
-          <!-- MySQL/SQL -->
-          <div
-            class="bg-[#161b22] bg-card-dark p-6 rounded-xl border border-gray-700 light:border-gray-200 light:bg-white text-center hover:shadow-xl hover:shadow-indigo-500/20 light:hover:shadow-indigo-300/50 transition duration-300 transform hover:-translate-y-1"
-          >
-            <i class="fas fa-database text-5xl text-amber-600 mb-3"></i>
-            <p class="font-semibold">MySQL/SQL</p>
-          </div>
-
-          <!-- Git/GitHub -->
-          <div
-            class="bg-[#161b22] bg-card-dark p-6 rounded-xl border border-gray-700 light:border-gray-200 light:bg-white text-center hover:shadow-xl hover:shadow-indigo-500/20 light:hover:shadow-indigo-300/50 transition duration-300 transform hover:-translate-y-1"
-          >
-            <i class="fab fa-git-alt text-5xl text-red-600 mb-3"></i>
-            <p class="font-semibold">Git/GitHub</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Projects Section -->
-      <section id="projects" class="py-24">
-        <h2 class="section-header text-4xl font-extrabold mb-12">
-          Featured Projects
-        </h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Project Card 1 -->
-          <div
-            class="bg-[#161b22] bg-card-dark rounded-xl overflow-hidden border border-gray-700 light:border-gray-200 light:bg-white hover:shadow-2xl hover:shadow-indigo-500/30 light:hover:shadow-indigo-300/50 transition duration-500"
-          >
-           <a href="https://ibb.co/sppBth9g"><img src="https://i.ibb.co/mrrxSm5R/Chat-GPT-Image-Oct-1-2025-01-41-11-PM.png" 
-              alt="Project 1"
-              class="w-full h-48 object-cover"
-            />
-            <div class="p-6">
-              <h3 class="text-2xl font-bold mb-2 text-primary-color">
-                PortFolio
-              </h3>
-              <p class="text-gray-400 light:text-gray-700 mb-4 text-sm">
-               A modern and responsive portfolio built with Next.js and Tailwind CSS, showcasing projects, skills, and experience. Features include a dynamic project gallery, smooth animations with Framer Motion, dark/light mode toggle, and SEO optimization for better visibility. Integrated with Contact Form API for easy communication.
-              </p>
-              <div class="flex space-x-3 text-sm font-medium">
-                <span
-                  class="px-3 py-1 bg-gray-800 rounded-full light:bg-gray-200 text-white"
-                  >Next.js</span
+              <div class="flex justify-between">
+                <span class="font-semibold text-white"
+                  >Name:</span
                 >
-                <span
-                  class="px-3 py-1 bg-gray-800 rounded-full light:bg-gray-200 text-white"
-                  >Tailwind</span
-                >
-                <span
-                  class="px-3 py-1 bg-gray-800 rounded-full light:bg-gray-200 text-white"
-                  >Prisma</span
-                >
+               <span class="font-semibold text-white">Kunal Sharma</span>
               </div>
-              <div class="mt-6 flex space-x-4">
-                <a
-                  href="#"
-                  target="_blank"
-                  class="text-primary-color hover:underline font-semibold"
+              <div class="flex justify-between">
+                <span class="font-semibold text-white"
+                  >Age:</span
                 >
-                  <i class="fas fa-external-link-alt mr-1"></i> Live Demo
-                  </li>
-            <li>
-              <a
-                class="github"
-                aria-label="GitHub"
-                href="https://github.com/kunalsharmajiat/Kunal-Portfolio-"
-                target="_blank"
-                data-sr-id="7"
-                style="
-                  visibility: visible;
-                  opacity: 1;
-                  transform: matrix3d(
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1
-                  );
-                  transition: 0.2s linear, opacity 1s cubic-bezier(0.5, 0, 0, 1),
-                    transform 1s cubic-bezier(0.5, 0, 0, 1);
-                "
-                ><i class="fab fa-github"></i
-              ></a>
-            </li>
+                <span class="font-semibold text-white">23</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="font-semibold text-white"
+                  >Location:</span
+                >
+                <span class="font-semibold text-white">Pune, Maharashtra, India</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="font-semibold text-white"
+                  >Email:</span
+                >
+                <a
+                  href="mailto:kunalsharmajiat@gmail.com"
+                  class="text-[#0A4D8C]"
+                >
+                  kunalsharmajiat@gmail.com
                 </a>
-                <a
-                  href="#"
-                  target="_blank"
-                  class="text-gray-400 hover:text-primary-color font-semibold"
+              </div>
+              <div class="flex justify-between">
+                <span class="font-semibold text-white"
+                  >Phone:</span
                 >
-                  <i class="fab fa-github mr-1"></i> Source Code
+                <a
+                  href="tel:+916006475471"
+                  class="text-[#0A4D8C]"
+                >
+                  +91 60064 75471
                 </a>
               </div>
             </div>
           </div>
+        </section>
 
-          <!-- Project Card 2 -->
-          <div
-            class="bg-[#161b22] bg-card-dark rounded-xl overflow-hidden border border-gray-700 light:border-gray-200 light:bg-white hover:shadow-2xl hover:shadow-indigo-500/30 light:hover:shadow-indigo-300/50 transition duration-500"
-          >
-            <img
-              <img src="https://i.ibb.co/5gL5DgBM/Screenshot-2025-10-0-imresizer-1.jpg" alt="Screenshot-2025-10-0-imresizer-1"
-                border="0"
+        <hr class="border-gray-700 light:border-gray-200 my-12" />
 
-              alt="Project 2"
-              class="w-full h-48 object-cover"
-            />
-            <div class="p-6">
-              <h3 class="text-2xl font-bold mb-2 text-primary-color">
-                Calculator-html
-              </h3>
-              <p class="text-gray-400 light:text-gray-700 mb-4 text-sm">
-               Calculator-html. 
-<br>✨ Musical Colorful Calculator ✨
- <br> 🎵 Musical Feedback 
- <br>🌈 Colorful Design 
- <br>🎮 Interactive Feel
- <br> 🖥️ Easy to Use
+        <section id="skills" class="py-24">
+          <h2 class="section-header text-4xl font-extrabold mb-12">Skills</h2>
 
-              </p>
-              <div class="flex space-x-3 text-sm font-medium">
-                <span
-                 class="px-3 py-1 bg-gray-800 rounded-full light:bg-gray-200 text-white"
-                  >React</span
-                >
-                <span
-                  class="px-3 py-1 bg-gray-800 rounded-full light:bg-gray-200 text-white"
-                  >Firebase</span
-                >
-                <span
-                 class="px-3 py-1 bg-gray-800 rounded-full light:bg-gray-200 text-white"
-                  >Drag & Drop</span
-                >
-              </div>
-              <div class="mt-6 flex space-x-4">
-                <a
-                  href="#"
-                  target="_blank"
-                  class="text-primary-color hover:underline font-semibold"
-                >
-                  <i class="fas fa-external-link-alt mr-1"></i> Live Demo
-                </li>
-            <li>
-              <a
-                class="github"
-                aria-label="GitHub"
-                href="https://github.com/kunalsharmajiat/Calculator-html"
-                target="_blank"
-                data-sr-id="7"
-                style="
-                  visibility: visible;
-                  opacity: 1;
-                  transform: matrix3d(
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1
-                  );
-                  transition: 0.2s linear, opacity 1s cubic-bezier(0.5, 0, 0, 1),
-                    transform 1s cubic-bezier(0.5, 0, 0, 1);
-                "
-                ><i class="fab fa-github"></i
-              ></a>
-            </li>
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+            <div
+              class="bg-[#161b22] p-7 rounded-xl border border-gray-700 light:border-gray-200 light:bg-white text-center hover:shadow-xl hover:shadow-indigo-500/20 light:hover:shadow-indigo-300/50 transition duration-300 transform hover:-translate-y-2"
+            >
+              <i class="fab fa-react text-6xl text-blue-400 mb-4"></i>
+              <p class="font-semibold bg-gradient-to-r from-sky-400 via-white to-blue-400 text-transparent bg-clip-text">
+  React Framework
+</p>
+
+            </div>
+
+            <div
+              class="bg-[#161b22] p-7 rounded-xl border border-gray-700 light:border-gray-200 light:bg-white text-center hover:shadow-xl hover:shadow-indigo-500/20 light:hover:shadow-indigo-300/50 transition duration-300 transform hover:-translate-y-2"
+            >
+              <i class="fab fa-node-js text-6xl text-green-500 mb-4"></i>
+           <p class="font-semibold bg-gradient-to-r from-green-400 via-lime-200 to-emerald-500 text-transparent bg-clip-text">
+  Node.JS
+</p>
+
+            </div>
+
+            <div
+              class="bg-[#161b22] p-7 rounded-xl border border-gray-700 light:border-gray-200 light:bg-white text-center hover:shadow-xl hover:shadow-indigo-500/20 light:hover:shadow-indigo-300/50 transition duration-300 transform hover:-translate-y-2"
+            >
+              <i class="fab fa-python text-6xl text-yellow-600 mb-4"></i>
+              <p class="font-semibold bg-gradient-to-r from-blue-500 via-yellow-300 to-blue-700 text-transparent bg-clip-text">
+  Python
+</p>
+
+            </div>
+
+            <div
+              class="bg-[#161b22] p-7 rounded-xl border border-gray-700 light:border-gray-200 light:bg-white text-center hover:shadow-xl hover:shadow-indigo-500/20 light:hover:shadow-indigo-300/50 transition duration-300 transform hover:-translate-y-2"
+            >
+              <i class="fas fa-cogs text-6xl text-indigo-500 mb-4"></i>
+              <p class="font-semibold bg-gradient-to-r from-blue-500 via-cyan-300 to-blue-700 text-transparent bg-clip-text">
+  C / C++
+</p>
+
+            </div>
+
+            <div
+              class="bg-[#161b22] p-7 rounded-xl border border-gray-700 light:border-gray-200 light:bg-white text-center hover:shadow-xl hover:shadow-indigo-500/20 light:hover:shadow-indigo-300/50 transition duration-300 transform hover:-translate-y-2"
+            >
+              <i class="fab fa-js-square text-6xl text-yellow-500 mb-4"></i>
+            <p class="font-semibold bg-gradient-to-r from-yellow-400 via-amber-300 to-yellow-500 text-transparent bg-clip-text">
+  JavaScript (ES6+)
+</p>
+
+            </div>
+
+            <div
+              class="bg-[#161b22] p-7 rounded-xl border border-gray-700 light:border-gray-200 light:bg-white text-center hover:shadow-xl hover:shadow-indigo-500/20 light:hover:shadow-indigo-300/50 transition duration-300 transform hover:-translate-y-2"
+            >
+              <i class="fas fa-code text-6xl text-orange-500 mb-4"></i>
+              <p class="font-semibold bg-gradient-to-r from-orange-500 via-red-400 to-blue-500 text-transparent bg-clip-text">
+  HTML & CSS
+</p>
+
+            </div>
+
+            <div
+              class="bg-[#161b22] p-7 rounded-xl border border-gray-700 light:border-gray-200 light:bg-white text-center hover:shadow-xl hover:shadow-indigo-500/20 light:hover:shadow-indigo-300/50 transition duration-300 transform hover:-translate-y-2"
+            >
+              <i class="fas fa-database text-6xl text-amber-600 mb-4"></i>
+            <p class="font-semibold bg-gradient-to-r from-cyan-300 via-blue-400 to-indigo-500 text-transparent bg-clip-text">
+  MySQL / SQL
+</p>
+
+            </div>
+          
+
+            <div
+              class="bg-[#161b22] p-7 rounded-xl border border-gray-700 light:border-gray-200 light:bg-white text-center hover:shadow-xl hover:shadow-indigo-500/20 light:hover:shadow-indigo-300/50 transition duration-300 transform hover:-translate-y-2"
+            >
+              <i class="fab fa-git-alt text-6xl text-red-600 mb-4"></i>
+             <p class="font-semibold bg-gradient-to-r from-orange-500 via-red-400 to-gray-900 text-transparent bg-clip-text">
+  Git / GitHub
+</p>
+
+            </div>
+          
+            <div class="bg-[#161b22] p-7 rounded-xl border border-gray-700 light:border-gray-200 light:bg-white text-center hover:shadow-xl hover:shadow-indigo-500/20 light:hover:shadow-indigo-300/50 transition duration-300 transform hover:-translate-y-2">
+  <i class="fab fa-css3-alt text-6xl text-blue-500 mb-4"></i>
+  <p class="font-semibold bg-gradient-to-r from-blue-400 via-cyan-300 to-sky-500 text-transparent bg-clip-text">
+    Tailwind CSS
+  </p>
+</div>
+<div class="bg-[#161b22] p-7 rounded-xl border border-gray-700 light:border-gray-200 light:bg-white text-center hover:shadow-xl hover:shadow-indigo-500/20 light:hover:shadow-indigo-300/50 transition duration-300 transform hover:-translate-y-2">
+  <i class="fas fa-fire text-6xl text-orange-400 mb-4"></i>
+  <p class="font-semibold bg-gradient-to-r from-orange-400 via-yellow-300 to-red-400 text-transparent bg-clip-text">
+    Firebase
+  </p>
+</div>
+        </section>
+
+        <hr class="border-gray-700 light:border-gray-200 my-12" />
+
+        <section id="projects" class="py-24">
+          <h2 class="section-header text-4xl font-extrabold mb-12">
+            Featured Projects
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
 
 
-                </a>
-                <a
-                  href="#"
-                  target="_blank"
-                  class="text-gray-400 hover:text-primary-color font-semibold"
-                >
-                  <i class="fab fa-github mr-1"></i> Source Code
-                </a>
+            <div
+              class="bg-[#161b22] rounded-xl overflow-hidden border border-gray-700 light:border-gray-200 light:bg-white hover:shadow-2xl hover:shadow-indigo-500/30 light:hover:shadow-indigo-300/50 transition duration-500"
+            >
+              <img
+                src="https://i.ibb.co/mrrxSm5R/Chat-GPT-Image-Oct-1-2025-01-41-11-PM.png"
+                alt="Portfolio Project Screenshot"
+                class="w-full h-48 object-cover"
+              />
+              <div class="p-6">
+                <h3 class="px-3 py-1 bg-gray-800 w-full light:bg-gray-200 text-white">
+                  PortFolio
+                </h3>
+                <p class="text-gray-400 light:text-gray-700 mb-4 text-sm">
+               ✨ Modern Developer Portfolio ✨ <br>
+               ⚛️ Built with Next.js & Tailwind CSS <br>
+               🧠 Showcasing Projects, Skills & Experience <br>
+               🖼️ Dynamic Project Gallery <br>
+                🎞️ Smooth Animations & Transitions <br>
+                  🌙 Dark / Light Mode Toggle <br>
+                  🚀 SEO Optimized & Fully Responsive
+                </p>
+                <div class="flex flex-wrap gap-2 text-sm font-medium">
+                  <span
+                    class="px-3 py-1 bg-gray-800 rounded-full light:bg-gray-200 text-white"
+                    >Next.js</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-gray-800 rounded-full light:bg-gray-200 text-white"
+                    >Tailwind</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-gray-800 rounded-full light:bg-gray-200 text-white"
+                    >React Icons / FontAwesome</span
+                  >
+                </div>
+                <div class="mt-6 flex space-x-4">
+                  <a
+                    href="https://github.com/kunalsharmajiat/Portfolio"
+                    target="_blank" class="text-sky-500 hover:text-sky-700 hover:underline font-semibold">
+                    <i class="fas fa-external-link-alt mr-1"></i> Live Demo
+                  </a>
+                  <a
+                    href="https://github.com/kunalsharmajiat/Kunal-Portfolio-"
+                    target="_blank"
+                    class="text-gray-400 hover:text-primary-color font-semibold"
+                  >
+                    <i class="fab fa-github mr-1"></i> Source Code
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Project Card 3 -->
+            <!-- Project Card 2 -->
+
+            <div
+              class="bg-[#161b22] rounded-xl overflow-hidden border border-gray-700 light:border-gray-200 light:bg-white hover:shadow-2xl hover:shadow-indigo-500/30 light:hover:shadow-indigo-300/50 transition duration-500"
+            >
+              <img
+                src="https://i.ibb.co/5gL5DgBM/Screenshot-2025-10-0-imresizer-1.jpg"
+                alt="Calculator-html Project Screenshot"
+                class="w-full h-48 object-cover"
+              />
+              <div class="p-6">
+                <h3 class="px-3 py-1 bg-gray-800 light:bg-gray-200 text-white">
+                  Calculator-html
+                </h3>
+                <p class="text-gray-400 light:text-gray-700 mb-4 text-sm">
+                ✨ Musical Colorful Calculator ✨ <br> 🎵 Musical Feedback <br> 🌈 Colorful Design  <br> 🎮 Interactive Feel <br> 🖥️ Easy to Use
+                </p>
+                <div class="flex flex-wrap gap-2 text-sm font-medium">
+                  <span
+                    class="px-3 py-1 bg-gray-800 rounded-full light:bg-gray-200 text-white"
+                    >HTML/CSS/JS</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-gray-800 rounded-full light:bg-gray-200 text-white"
+                    >CSS Animations / Transitions</span
+                  >
+                </div>
+                <div class="mt-6 flex space-x-4">
+                  <a
+                    href="https://github.com/kunalsharmajiat/Calculator-html"
+                    target="_blank" class="text-sky-500 hover:text-sky-700 hover:underline font-semibold">
+                    <i class="fas fa-external-link-alt mr-1"></i> Live Demo
+                  </a>
+                  <a
+                    href="https://github.com/kunalsharmajiat/Calculator-html"
+                    target="_blank"
+                    class="text-gray-400 hover:text-primary-color font-semibold"
+                  >
+                    <i class="fab fa-github mr-1"></i> Source Code
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project Card 3 -->
           <div
             class="bg-[#161b22] bg-card-dark rounded-xl overflow-hidden border border-gray-700 light:border-gray-200 light:bg-white hover:shadow-2xl hover:shadow-indigo-500/30 light:hover:shadow-indigo-300/50 transition duration-500"
           >
@@ -657,22 +784,19 @@
                 border="0"
             /></a>
             <div class="p-6">
-              <h3 class="text-2xl font-bold mb-2 text-primary-color">
+              <h3 class="px-3 py-1 bg-gray-800 light:bg-gray-200 text-white">
                 Youtube-video-player
               </h3>
               <p class="text-gray-400 light:text-gray-700 mb-4 text-sm">
                 <br />
-                This is a simple YouTube video player webpage built with HTML.
-                <br />
-                It lets you paste any YouTube video link or just the video ID
-                into a text box. <br />
-                When you click Load, the video plays inside the page instantly —
-                no need to open YouTube. <br />
-                The player is clean and distraction-free: it hides YouTubes
-                descriptions,comments, and recommended videos, showing only the
-                video itself. <br />
-                The design is modern, responsive, and works on desktop and
-                mobile..
+                ✨ YouTube Video Player ✨ <br>
+                💻 Built with HTML, CSS & JavaScript <br>
+              🎥 Play Any YouTube Video Instantly <br>
+             🔗 Paste Link or Video ID — No Redirects <br>
+            🚫 No Ads, Comments, or Recommendations <br>
+            🧭 Clean & Distraction-Free Interface <br>
+                 📱 Responsive Design for All Devices
+
               </p>
               <div class="flex space-x-3 text-sm font-medium">
                 <span
@@ -694,264 +818,192 @@
                   target="_blank"
                   class="text-primary-color hover:underline font-semibold"
                 >
-                  <i class="fas fa-external-link-alt mr-1"></i> Live Demo
+                <a href="https://github.com/kunalsharmajiat/Youtube-video-player" target="_blank" class="text-sky-500 hover:text-sky-700 hover:underline font-semibold">
+    <i class="fas fa-external-link-alt mr-1"></i> Live Demo
                 </a>
 
 </li>
             <li>
               <a
-                class="github"
-                aria-label="GitHub"
-                href="https://github.com/kunalsharmajiat/Youtube-video-player"
-                target="_blank"
-                data-sr-id="7"
-                style="
-                  visibility: visible;
-                  opacity: 1;
-                  transform: matrix3d(
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1
-                  );
-                  transition: 0.2s linear, opacity 1s cubic-bezier(0.5, 0, 0, 1),
-                    transform 1s cubic-bezier(0.5, 0, 0, 1);
-                "
-                ><i class="fab fa-github"></i
-              ></a>
+  href="https://github.com/kunalsharmajiat/Youtube-video-player"
+  target="_blank"
+  aria-label="GitHub"
+  class="github text-gray-400 hover:text-primary-color font-semibold transition duration-300"
+>
+  <i class="fab fa-github mr-1"></i> Source Code
+</a>
+
             </li>
 
+        </section>
 
+        <hr class="border-gray-700 light:border-gray-200 my-12" />
 
+        <section id="contact" class="py-24">
+          <h2 class="section-header text-4xl font-extrabold mb-12">
+            Get in Touch
+          </h2>
 
+          <div class="max-w-xl mx-auto text-center">
+            <p class="text-lg mb-8 text-gray-300 light:text-gray-700">
+              Have an opportunity or just want to chat? Send me an email or
+              connect with me on LinkedIn!
+            </p>
+            <a
+              href="mailto:kunalsharmajiat@gmail.com"
+              class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-primary-color hover:bg-indigo-700 transition duration-300 shadow-lg shadow-indigo-500/50 light:shadow-indigo-300/50"
+            >
+              <i class="fas fa-envelope mr-2"></i> Email Me
+            </a>
 
-                <a
-                  href="#"
-                  target="_blank"
-                  class="text-gray-400 hover:text-primary-color font-semibold"
-                >
-                  <i class="fab fa-github mr-1"></i> Source Code
-                </a>
-              </div>
+            <div class="mt-8 flex justify-center space-x-6">
+              <a
+                href="https://www.linkedin.com/in/kunal-sharma-54a484325"
+                target="_blank"
+                class="text-4xl text-blue-700 hover:text-primary-color transition duration-300"
+                aria-label="LinkedIn"
+              >
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a
+                href="https://github.com/kunalsharmajiat"
+                target="_blank"
+                class="text-4xl text-gray-200 dark:text-gray-200 hover:text-primary-color transition duration-300"
+                aria-label="GitHub"
+              >
+                <i class="fab fa-github"></i>
+              </a>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </main>
 
-      <!-- Contact Section -->
-      <section id="contact" class="py-24">
-        <h2 class="section-header text-4xl font-extrabold mb-12">
-          Get In Touch
-        </h2>
-
-        <div
-          class="max-w-3xl mx-auto bg-[#161b22] bg-card-dark p-8 md:p-12 rounded-xl border border-gray-700 light:border-gray-200 light:bg-white shadow-xl"
-        >
-          <p class="text-lg text-center mb-8 text-gray-300 light:text-gray-700">
-            Have a project in mind or want to collaborate? Send me a message!
-          </p>
-          <form action="#" method="POST" class="space-y-6">
-            <div>
-              <label
-                for="name"
-                class="block text-sm font-medium mb-2 text-gray-400 light:text-gray-700"
-                >Your Name</label
-              >
-              <input
-                type="text"
-                id="name"
-                name="name"
-               class="w-fullpx-3 py-1 bg-gray-800 w-full light:bg-gray-200 text-white"
-                required
-              />
-            </div>
-            <div>
-              <label
-                for="email"
-                class="block text-sm font-medium mb-2 text-gray-400 light:text-gray-700"
-                >Your Email</label
-              >
-              <input
-                type="email"
-                id="email"
-                name="email"
-                class="w-full px-3 py-1 bg-gray-800 w-full light:bg-gray-200 text-white"
-                placeholder="Your@gmail.com"
-                required
-              />
-            </div>
-            <div>
-              <label
-                for="message"
-                class="block text-sm font-medium mb-2 text-gray-400 light:text-gray-700"
-                >Message</label
-              >
-              <textarea
-                id="message"
-                name="message"
-                rows="5"
-                class="w-full px-3 py-1 bg-gray-800 w-full light:bg-gray-200 text-white focus:ring-primary-color focus:border-primary-color light:bg-white light:border-gray-300 light:text-gray-900"
-                placeholder="I'd like to discuss a project..."
-                required
-              ></textarea>
-            </div>
-            <button
-              type="submit"
-              class="w-full px-6 py-3 border border-transparent text-lg font-medium rounded-lg text-white bg-primary-color hover:bg-indigo-700 transition duration-300 shadow-lg shadow-indigo-500/50 light:shadow-indigo-300/50"
-            >
-              Send Message
-            </button>
-          </form>
-        </div>
-      </section>
-
-      <!-- Mode Toggle Button -->
-      <button
-        id="mode-toggle"
-        class="fixed bottom-6 right-6 p-3 rounded-full bg-primary-color text-white shadow-lg hover:scale-110 transition duration-300 z-50"
+      <footer
+        class="mt-20 py-8 border-t border-gray-700 light:border-gray-200 text-center"
       >
-        <i id="mode-icon" class="fas fa-sun"></i>
-      </button>
-    </main>
-
-    <!-- Footer -->
-    <footer
-      class="mt-12 py-8 border-t border-gray-700 light:border-gray-200 text-center text-sm text-gray-500 light:text-gray-600"
-    >
-      &copy; 2024 Kunal Sharma. All rights reserved. | Crafted with love.
-      <span class="text-red-500">&hearts;</span>
-    </footer>
+        <p class="text-sm text-gray-500">
+          &copy; 2024 Kunal Sharma. All rights reserved. Built with ❤️ By Kunal Sharma.
+        </p>
+      </footer>
+    </div>
 
     <script>
-      // --- Dark/Light Mode Toggle Logic ---
-      const modeToggle = document.getElementById("mode-toggle");
-      const modeIcon = document.getElementById("mode-icon");
-      const htmlElement = document.documentElement;
-
-      // Function to set the mode
-      function setMode(mode) {
-        if (mode === "dark") {
-          htmlElement.classList.remove("light");
-          htmlElement.classList.add("dark");
-          modeIcon.className = "fas fa-sun"; // Show sun icon to switch to light mode
-          localStorage.setItem("theme", "dark");
-        } else {
-          htmlElement.classList.remove("dark");
-          htmlElement.classList.add("light");
-          modeIcon.className = "fas fa-moon"; // Show moon icon to switch to dark mode
-          localStorage.setItem("theme", "light");
-        }
-      }
-
-      // Initialize mode based on system preference or saved preference
-      const savedTheme = localStorage.getItem("theme");
-      if (savedTheme) {
-        setMode(savedTheme);
-      } else if (
-        window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: light)").matches
-      ) {
-        // Default to light mode if system preference is light
-        setMode("light");
-      } else {
-        // Default to dark mode
-        setMode("dark");
-      }
-
-      modeToggle.addEventListener("click", () => {
-        if (htmlElement.classList.contains("dark")) {
-          setMode("light");
-        } else {
-          setMode("dark");
-        }
+      // --- 1. Particles.js Initialization ---
+      particlesJS("particles-js", {
+        particles: {
+          number: { value: 80 },
+          color: { value: "#6366f1" } /* Changed to primary-color */,
+          shape: { type: "circle" },
+          opacity: { value: 0.5 },
+          size: { value: 3 },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#6366f1" /* Changed to primary-color */,
+            opacity: 0.4,
+            width: 1,
+          },
+          move: {
+            enable: true,
+            speed: 3,
+            direction: "none",
+            out_mode: "out",
+          },
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: { enable: true, mode: "repulse" },
+            onclick: { enable: true, mode: "push" },
+            resize: true,
+          },
+          modes: {
+            grab: { distance: 400, line_linked: { opacity: 1 } },
+            bubble: {
+              distance: 400,
+              size: 40,
+              duration: 2,
+              opacity: 8,
+              speed: 3,
+            },
+            repulse: { distance: 100, duration: 0.4 },
+            push: { particles_nb: 4 },
+            remove: { particles_nb: 2 },
+          },
+        },
+        retina_detect: true,
       });
 
-      // --- Typing Effect Logic ---
-      const textElement = document.getElementById("typing-text");
-      const roles = [
-        "Full-Stack Developer",
-        "Android App Developer",
-        "Backend Expert",
-        "Freelancer",
-      ];
-      let roleIndex = 0;
+      // --- 2. Portfolio Activation on Click ---
+      document
+        .getElementById("welcome-screen")
+        .addEventListener("click", function () {
+          const welcomeScreen = this;
+          const portfolioContent = document.getElementById("portfolio-content");
+
+          // 1. Fade out the welcome screen
+          welcomeScreen.style.opacity = "0";
+
+          // 2. After the transition, hide the screen and show content
+          setTimeout(() => {
+            welcomeScreen.classList.add("hidden");
+            portfolioContent.classList.remove("hidden");
+
+            // Optional: Scroll to the top of the main content
+            window.scrollTo(0, 0);
+
+            // Start the typing effect after the content is visible
+            startTypingEffect();
+          }, 500); // Matches the opacity transition duration
+        });
+
+      // --- 3. Typing Effect (Retained from your code) ---
+      const textArray = ["Full Stack Developer", "Web Designer", "Programmer"];
+      const typingElement = document.getElementById("typing-text");
+      let arrayIndex = 0;
       let charIndex = 0;
-      let isDeleting = false;
-      const typingSpeed = 100;
-      const deletingSpeed = 50;
-      const delayBetweenRoles = 1500;
 
       function type() {
-        const currentRole = roles[roleIndex];
-        const displayText = currentRole.substring(0, charIndex);
-        textElement.textContent = displayText;
-
-        if (!isDeleting) {
-          // Typing forward
+        if (charIndex < textArray[arrayIndex].length) {
+          typingElement.textContent += textArray[arrayIndex].charAt(charIndex);
           charIndex++;
-          if (charIndex > currentRole.length) {
-            isDeleting = true;
-            // Pause at the end of the word
-            setTimeout(type, delayBetweenRoles);
-            return;
-          }
+          setTimeout(type, 100); // Typing speed
         } else {
-          // Deleting
-          charIndex--;
-          if (charIndex < 0) {
-            isDeleting = false;
-            roleIndex = (roleIndex + 1) % roles.length;
-            // Pause before starting the next word
-            setTimeout(type, 500);
-            return;
-          }
+          setTimeout(erase, 1500); // Pause before erasing
         }
-
-        const speed = isDeleting ? deletingSpeed : typingSpeed;
-        setTimeout(type, speed);
       }
 
-      // Start the typing animation on load
-      window.onload = () => {
-        // Delay starting the typing effect slightly for better UX
-        setTimeout(type, 500);
-      };
-
-      // --- Mobile Menu Toggle Logic ---
-      const mobileMenuButton = document.getElementById("mobile-menu-button");
-      const mobileMenu = document.getElementById("mobile-menu");
-      const navLinks = document.querySelectorAll(".nav-link");
-
-      mobileMenuButton.addEventListener("click", () => {
-        mobileMenu.classList.toggle("hidden");
-        // Change button icon to X if open, or bars if closed
-        const icon = mobileMenuButton.querySelector("i");
-        if (mobileMenu.classList.contains("hidden")) {
-          icon.className = "fas fa-bars";
+      function erase() {
+        if (charIndex > 0) {
+          typingElement.textContent = textArray[arrayIndex].substring(
+            0,
+            charIndex - 1
+          );
+          charIndex--;
+          setTimeout(erase, 50); // Erasing speed
         } else {
-          icon.className = "fas fa-times";
+          arrayIndex = (arrayIndex + 1) % textArray.length;
+          setTimeout(type, 500); // Pause before typing next word
         }
-      });
+      }
 
-      // Close mobile menu when a link is clicked
-      navLinks.forEach((link) => {
+      // Function to start the typing effect (called after splash screen hides)
+      function startTypingEffect() {
+        setTimeout(type, 1000); // Initial delay before starting to type
+      }
+
+      // --- 4. Mobile Menu Toggle (Retained from your code) ---
+      document
+        .getElementById("mobile-menu-button")
+        .addEventListener("click", function () {
+          const menu = document.getElementById("mobile-menu");
+          menu.classList.toggle("hidden");
+        });
+
+      // Close mobile menu when a nav link is clicked
+      document.querySelectorAll("#mobile-menu a").forEach((link) => {
         link.addEventListener("click", () => {
-          if (!mobileMenu.classList.contains("hidden")) {
-            mobileMenu.classList.add("hidden");
-            mobileMenuButton.querySelector("i").className = "fas fa-bars";
-          }
+          document.getElementById("mobile-menu").classList.add("hidden");
         });
       });
     </script>
